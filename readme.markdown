@@ -1,10 +1,10 @@
-# Deduction
+# Reduction
 
-Deduction is a sibling project to [Reduction](https://github.com/Grayson/reduction).  Where Reduction "reduces" C/C++ header files into a JSON description, Deduction "deduces" C files that wrap the public C/C++ datatypes.  The intention is to provide a C wrapper library that can be readily used to create bindings for other languages.
+Reduction is a sibling project to [Deduction](https://github.com/Grayson/deduction).  Where Deduction "deduces" a JSON description from C/C++ files, Reduction "reduces" C++ libraries into C wrapper libraries based on that description.  The intention is these wrapper libraries can readily  be used to create bindings for other languages.
 
 ## Example
 
-Following from the [Example](https://github.com/Grayson/reduction#example) used in `Reduction`, `deduction` would produce two files.
+Following from the [Example](https://github.com/Grayson/deduction#example) used in `deduction`, `reduction` would produce two files.
 
 The first will be a header file:
 
