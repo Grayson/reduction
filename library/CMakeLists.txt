@@ -35,11 +35,14 @@ add_library(libreduction
 
 add_dependencies(libreduction deduction fmtlib)
 
-target_link_libraries(libreduction PRIVATE ${DEDUCTION_JSON_LIB} ${FMT_LIB})
+target_link_libraries(libreduction
+	PUBLIC ${DEDUCTION_JSON_LIB}
+	PRIVATE ${FMT_LIB})
 
 target_include_directories(libreduction
 	INTERFACE include
-	PRIVATE include/reduction src ${DEDUCTION_INCLUDE_DIR} ${FMT_INCLUDE_DIR})
+	PUBLIC ${DEDUCTION_INCLUDE_DIR}
+	PRIVATE include/reduction src ${FMT_INCLUDE_DIR})
 
 install(
 	TARGETS libreduction
