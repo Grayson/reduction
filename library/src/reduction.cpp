@@ -4,8 +4,6 @@
 #include <fmt/format.h>
 
 #include "enumeration.hpp"
-#include "header-converter.hpp"
-#include "implementation-converter.hpp"
 
 namespace
 {

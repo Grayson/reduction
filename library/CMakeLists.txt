@@ -27,8 +27,6 @@ add_library(libreduction
 	include/reduction/reduction.hpp
 	src/enumeration.cpp
 	src/enumeration.hpp
-	src/header-converter.hpp
-	src/implementation-converter.hpp
 	src/name_mangler.cpp
 	src/reduction.cpp
 	src/utility.hpp
