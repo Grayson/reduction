@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 
 project(tests)
 
-enable_testing()
-
 set(REQUIRED_LIBRARIES libreduction)
 
 file(GLOB files "src/*.cpp")
