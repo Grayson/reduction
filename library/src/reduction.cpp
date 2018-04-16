@@ -36,8 +36,7 @@ namespace reduction {
 	{
 		try {
 			auto json = nlohmann::json::parse(jsonString);
-			deduction::parse_result result = json;
-			return result;
+			return json.at("items").get<deduction::parse_result>();
 		}
 		catch (nlohmann::json::parse_error error) {
 			return deduction::parse_result {};
