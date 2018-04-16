@@ -1,3 +1,5 @@
+#pragma once
+
 #include <deduction/datatypes/enumeration.hpp>
 #include <fmt/format.h>
 #include "bridge.hpp"

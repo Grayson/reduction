@@ -1,3 +1,5 @@
+#pragma once
+
 #include "bridge.hpp"
 
 namespace reduction {
