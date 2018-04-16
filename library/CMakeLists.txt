@@ -29,6 +29,7 @@ add_library(libreduction
 	src/header-converter.hpp
 	src/implementation-converter.hpp
 	src/name_mangler.cpp
+	src/reduction.cpp
 	src/utility.hpp
 	src/utility.cpp)
 
