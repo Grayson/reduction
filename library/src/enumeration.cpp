@@ -18,14 +18,21 @@ namespace reduction {
 		});
 		pub << "};\n";
 
+		auto const publicFileName = generate_file_name(mangledName, visibility::public_file, file_type::interface);
+
 		fmt::MemoryWriter priv;
+		priv.write(R"incl(extern "C" {{
+	#include "{}"
+}}
+)incl", publicFileName);
+
 		// mangled_enum_name map(fqd::enumeration value)
-		priv << mangledName << " map(" << enumeration.full_name << ");\n";
+		priv << mangledName << " map(" << enumeration.full_name << " value);\n";
 		// fqd::enumeration map(mangled_enum_name value)
-		priv << enumeration.full_name << " map (" << mangledName << ");\n";
+		priv << enumeration.full_name << " map(" << mangledName << " value);\n";
 
 		bridge::file_info publicFile {
-			generate_file_name(mangledName, visibility::public_file, file_type::interface),
+			std::move(publicFileName),
 			pub.c_str()
 		};
 

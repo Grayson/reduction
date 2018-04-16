@@ -23,6 +23,13 @@ char const * const PublicHeader = R"test(enum reduction_testenum {
 };
 )test";
 
+char const * const PrivateHeader = R"test(extern "C" {
+	#include "reduction_testenum.h"
+}
+reduction_testenum map(reduction::testenum value);
+reduction::testenum map(reduction_testenum value);
+)test";
+
 TEST_CASE("parse json", "[enumeration]") {
 	auto const result = reduction::parse_json(EnumerationJson);
 	REQUIRE(result.items.size() == 1);
@@ -47,4 +54,8 @@ TEST_CASE("generate wrappers", "[enumeration]") {
 	auto const & pub = wrappers[0].pub;
 	REQUIRE(pub.name == "reduction_testenum.h");
 	REQUIRE(pub.contents == PublicHeader);
+
+	auto const & priv = wrappers[0].priv;
+	REQUIRE(priv.name == "reduction_testenum_priv.h");
+	REQUIRE(priv.contents == PrivateHeader);
 }
