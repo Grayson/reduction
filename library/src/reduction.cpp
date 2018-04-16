@@ -44,8 +44,10 @@ namespace reduction {
 	std::vector<bridge> create_wrappers(deduction::parse_result parsedResults) {
 		std::vector<bridge> bridges;
 		header_visitor visitor;
+		implementation_visitor implVisitor;
 		std::for_each(std::begin(parsedResults.items), std::end(parsedResults.items), [&](auto const & item) {
 			bridges.emplace_back(mpark::visit(visitor, item));
+			bridges.emplace_back(mpark::visit(implVisitor, item));
 		});
 		return bridges;
 	}
