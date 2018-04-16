@@ -1,5 +1,7 @@
+#pragma once
+
 #include <string>
 
 namespace reduction {
-	std::string mangle_name(std::string const & name);
+	std::string mangle_name(std::string name);
 }
