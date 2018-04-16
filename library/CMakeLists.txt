@@ -24,6 +24,7 @@ set(FMT_LIB "${CMAKE_BINARY_DIR}/fmt/lib/libfmt.a")
 add_library(libreduction
 	include/reduction/name_mangler.hpp
 	include/reduction/reduction.hpp
+	src/bridge.hpp
 	src/name_mangler.cpp
 	src/utility.hpp
 	src/utility.cpp)
