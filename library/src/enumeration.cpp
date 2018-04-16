@@ -33,12 +33,12 @@ namespace reduction {
 
 		bridge::file_info publicFile {
 			std::move(publicFileName),
-			pub.c_str()
+			pub.str()
 		};
 
 		bridge::file_info privateFile {
 			generate_file_name(mangledName, visibility::private_file, file_type::interface),
-			priv.c_str()
+			priv.str()
 		};
 
 		return { std::move(publicFile), std::move(privateFile) };
@@ -76,8 +76,8 @@ namespace reduction {
 
 		bridge::file_info privateFile {
 			generate_file_name(mangledName, visibility::private_file, file_type::implementation),
-			priv.c_str()
+			priv.str()
 		};
 
-		return { {"",""}, std::move(privateFile) };	}
+		return { {}, std::move(privateFile) };	}
 }
