@@ -34,6 +34,31 @@ reduction::testenum map(reduction_testenum value);
 
 /* Implementations */
 
+char const * const PublicImplementation = "";
+char const * const PrivateImplementation = R"test(#include "reduction_testenum_priv.hpp"
+
+reduction_testenum map(reduction::testenum value) {
+	switch (value) {
+	case reduction::testenum::foo:
+		return reduction_testenum_foo;
+	case reduction::testenum::bar:
+		return reduction_testenum_bar;
+	case reduction::testenum::baz:
+		return reduction_testenum_baz;
+	}
+}
+
+reduction::testenum map(reduction_testenum value) {
+	switch (value) {
+	case reduction_testenum_foo:
+		return reduction::testenum::foo;
+	case reduction_testenum_bar:
+		return reduction::testenum::bar;
+	case reduction_testenum_baz:
+		return reduction::testenum::baz;
+	}
+}
+)test";
 
 /* Tests */
 
@@ -63,6 +88,14 @@ TEST_CASE("generate wrappers", "[enumeration]") {
 	REQUIRE(pubHeader.contents == PublicHeader);
 
 	auto const & privHeader = wrappers[0].priv;
-	REQUIRE(privHeader.name == "reduction_testenum_priv.h");
+	REQUIRE(privHeader.name == "reduction_testenum_priv.hpp");
 	REQUIRE(privHeader.contents == PrivateHeader);
+
+	auto const & pubImpl = wrappers[1].pub;
+	REQUIRE(pubImpl.name == "");
+	REQUIRE(pubImpl.contents == PublicImplementation);
+
+	auto const & privImpl = wrappers[1].priv;
+	REQUIRE(privImpl.name == "reduction_testenum_priv.cpp");
+	REQUIRE(privImpl.contents == PrivateImplementation);
 }

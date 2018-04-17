@@ -49,30 +49,29 @@ namespace reduction {
 
 		fmt::MemoryWriter priv;
 
-		priv.write("import \"<{}.h>\"", "original_file_name"); // TODO: Get filename
-		priv.write("extern \"C\" {\n#include \"{}}.h\"\n}\n", generate_file_name(mangledName, visibility::public_file, file_type::interface));
+		priv.write("#include \"{}\"\n\n", generate_file_name(mangledName, visibility::private_file, file_type::interface));
 
 		// Map C++ to C
 		priv << mangledName << " map(" << enumeration.full_name << " value) {\n"
 		<< "\tswitch (value) {\n";
 
 		std::for_each(std::begin(enumeration.case_labels), std::end(enumeration.case_labels), [&](auto const & label) {
-			priv << "case " << label.full_name << ":\n"
-			<< "return " << mangle_name(label.full_name) << ";\n";
+			priv << "\tcase " << label.full_name << ":\n"
+			<< "\t\treturn " << mangle_name(label.full_name) << ";\n";
 		});
 
-		priv << "\n";
+		priv << "\t}\n}\n\n";
 
 		// Map C to C++
 		priv << enumeration.full_name << " map(" << mangledName << " value) {\n"
-		<< "\tswitch (value) {\n";
+			<< "\tswitch (value) {\n";
 
 		std::for_each(std::begin(enumeration.case_labels), std::end(enumeration.case_labels), [&](auto const & label) {
-			priv << "case " << mangle_name(label.full_name) << ":\n"
-			<< "return " << label.full_name << ";\n";
+			priv << "\tcase " << mangle_name(label.full_name) << ":\n"
+			<< "\t\treturn " << label.full_name << ";\n";
 		});
 
-		priv << "}\n";
+		priv << "\t}\n}\n";
 
 		bridge::file_info privateFile {
 			generate_file_name(mangledName, visibility::private_file, file_type::implementation),
