@@ -2,8 +2,11 @@
 
 namespace reduction {
 	std::string generate_file_name(std::string base, visibility visibility, file_type type) {
+		bool isPrivate = visibility == visibility::private_file;
 		return base
-			+ (visibility == visibility::private_file ? "_priv" : "")
-			+ (type == file_type::interface ? ".h" : ".c");
+			+ (isPrivate ? "_priv" : "")
+			+ (type == file_type::interface
+			   	? isPrivate ? ".hpp" : ".h"
+			   	: ".cpp");
 	}
 }
