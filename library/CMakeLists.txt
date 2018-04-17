@@ -6,9 +6,9 @@ project(libreduction)
 ExternalProject_Add(deduction
 	PREFIX ${CMAKE_BINARY_DIR}/deduction
 	GIT_REPOSITORY git@github.com:Grayson/deduction.git
-	GIT_TAG 20c6e85a3bfd3ee193fc50fe21ba7e4c2075da87
+	GIT_TAG 91652a65e1c8bd42de535efdf8fdbf3f10b5dd97
 	GIT_SHALLOW YES
-	CMAKE_ARGS -DDATATYPES_ONLY=ON -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
+	CMAKE_ARGS -DDATATYPES_ONLY=ON -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DENABLE_TESTS=OFF)
 set(DEDUCTION_INCLUDE_DIR "${CMAKE_BINARY_DIR}/deduction/include")
 set(DEDUCTION_JSON_LIB "${CMAKE_BINARY_DIR}/deduction/lib/libdeduction-datatypes-json.a")
 
